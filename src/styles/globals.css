@@ -33,11 +33,7 @@
 }
 
 @layer components {
-    .touch-target {
-        padding: var(--spacing);
-    }
-
     .touch-target:hover {
-        border-bottom: 2px solid var(--color-link-hover);
+        border-bottom: 2px solid var(--color-link-hover) !important;
     }
 }

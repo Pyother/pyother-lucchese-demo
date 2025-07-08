@@ -1,10 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import Parser from 'html-react-parser'
-import tplHeader from './components/Header.liquid'
-import tplContent from './components/Content.liquid'
-import tplFooter from './components/Footer.liquid'
-import { engine } from './engine'
-import './styles/globals.css'
+// * React:
+import React, { useEffect, useState } from 'react';
+import Parser from 'html-react-parser';
+
+// * Liquid:
+import tplHeader from './components/Header.liquid';
+import tplContent from './components/Content.liquid';
+import tplFooter from './components/Footer.liquid';
+import { engine } from './engine';
+
+// * Styles:
+import './styles/globals.css';
+
+// * Alpine:
+import Alpine from 'alpinejs';
+
 
 export default function App(): JSX.Element {
     const [headerHTML, setHeaderHTML] = useState<string>('')
@@ -24,6 +33,16 @@ export default function App(): JSX.Element {
         }
         loadTemplates()
     }, [])
+    
+    useEffect(() => {
+        setTimeout(() => {
+            const appEl = document.querySelector('.App')
+            if (appEl) {
+                Alpine.initTree(appEl)
+            }
+        }, 0)
+    }, [headerHTML, contentHTML, footerHTML])
+    
 
     return (
         <div className="App min-h-screen flex flex-col">
