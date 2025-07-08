@@ -1,18 +1,35 @@
-// * React:
-import React from 'react';
+import React, { useEffect, useState } from 'react'
+import Parser from 'html-react-parser'
+import tplHeader from './components/Header.liquid'
+import tplContent from './components/Content.liquid'
+import tplFooter from './components/Footer.liquid'
+import { engine } from './engine'
+import './styles/globals.css'
 
-// * Styles:
-import './styles/globals.css';
+export default function App(): JSX.Element {
+    const [headerHTML, setHeaderHTML] = useState<string>('')
+    const [contentHTML, setContentHTML] = useState<string>('')
+    const [footerHTML, setFooterHTML] = useState<string>('')
 
-const App = () => {
+    useEffect(() => {
+        async function loadTemplates() {
+            const [h, c, f] = await Promise.all([
+                engine.renderFile(tplHeader.toString()),
+                engine.renderFile(tplContent.toString()),
+                engine.renderFile(tplFooter.toString()),
+            ])
+            setHeaderHTML(h)
+            setContentHTML(c)
+            setFooterHTML(f)
+        }
+        loadTemplates()
+    }, [])
+
     return (
-        <div className="App">
-            <header className="App-header">
-                <h1>Welcome to PyOther Lucchese Demo</h1>
-                <p>This is a simple React application.</p>
-            </header>
+        <div className="App min-h-screen flex flex-col">
+            {Parser(headerHTML)}
+            {Parser(contentHTML)}
+            {Parser(footerHTML)}
         </div>
     )
 }
-
-export default App;
