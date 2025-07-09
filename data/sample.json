@@ -1,0 +1,16 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "name": "",
+            "price": 0,
+            "color": "brown",
+            "colorPhoto": "https://cdn.starapps.studio/v2/apps/vsk/lucchese-inc/groups/122889/100/priscilla-suede-espresso.webp?width=80&height=80&crop=top",
+            "style": "GY4579.S54-2019-B-6",
+            "photos": [
+                "https://www.lucchese.com/cdn/shop/files/GY4579.S54_Right_2000x.jpg?v=1744392497",
+                "https://www.lucchese.com/cdn/shop/files/GY4579.S54_Pair_2000x.jpg?v=1744392497"
+            ]
+        }
+    ]
+}
