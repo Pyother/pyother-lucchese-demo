@@ -40,4 +40,16 @@
     .touch-target:hover {
         border-bottom: 2px solid var(--color-link-hover) !important;
     }
+
+    .rounded-circle {
+        border-radius: 5em !important;
+        width: 40px !important;
+        height: 40px !important;
+        object-fit: cover !important;    
+    }
+
+    .rounded-circle:hover {
+        padding: 2px !important;
+        border: 2px solid var(--color-link-hover) !important;
+    }
 }

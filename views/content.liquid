@@ -1,4 +1,4 @@
-<div class="flex flex-col">
+<div x-data="productSelector()" x-init="init()" class="flex flex-col">
     <div class="flex flex-row p-[var(--spacing)]">
         <div class="flex flex-1 flex-row justify-start items-center space-x-1">
             <p class="text-[var(--color-link-hover)]">Home</p>
@@ -14,11 +14,39 @@
     </div>
 
     <div class="flex flex-col md:flex-row ">
-        <div class="flex-1">
+        <div class="flex flex-1">
             A
         </div>
-        <div class="flex flex-1 flex-row space-x-4 items-center">
-            B
+        <div class="flex flex-1 flex-col space-y-1 p-1 md:p-0 pl-1 pr-1">
+            <h1 x-text="selectedProduct ? selectedProduct.name : null" class="uppercase"></h1>
+            <p x-text="selectedProduct.id"></p>
+            <div class="flex flex-row space-x-1">
+                {% for product in products %}
+                    <img 
+                        src="{{ product.colorPhoto }}" uppercase
+                        alt="{{ product.name }}" 
+                        class="rounded-circle"
+                        @click='selectProduct({{ product | json | escape }} )'
+                    />
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    function productSelector() {
+        return { 
+            products: {{products | json | safe}},
+            selectedProduct: null,
+            init() {
+                if (this.products.length > 0) {
+                    this.selectedProduct = this.products[0];
+                }
+            },
+            selectProduct(product) {
+                this.selectedProduct = product;
+            }
+        }
+    }
+</script>
