@@ -31,4 +31,4 @@ app.get('/api/products', (req, res) => {
   res.json(JSON.parse(raw));
 });
 
-app.listen(50034, () => console.log('Server listening on port 50034'));
+app.listen(50036, () => console.log('Server listening on port 50034'));
