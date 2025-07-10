@@ -17,9 +17,13 @@ app.set('views', path.resolve(__dirname, 'views'));
 app.set('view engine', 'liquid');
 
 app.get('/', (req, res) => {
-    const raw = fs.readFileSync(path.resolve(__dirname, 'data/sample.json'));
-    const products = JSON.parse(raw).products;
-    res.render('main', { products });
+    const raw_products = fs.readFileSync(path.resolve(__dirname, 'data/sample.json'));
+    const raw_texts = fs.readFileSync(path.resolve(__dirname, 'data/texts.json'));
+
+    const products = JSON.parse(raw_products).products;
+    const texts = JSON.parse(raw_texts);
+
+    res.render('main', { products, texts });
 });
 
 app.get('/api/products', (req, res) => {

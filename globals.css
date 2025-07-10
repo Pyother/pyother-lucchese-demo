@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Georgia:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;200&family=Georgia:wght@300;400&display=swap');
 
 :root {
     /* FONTS: */
@@ -15,7 +15,7 @@
     --color-accent: #8a4b3b;
 
     --color-link: #1d72b8;
-    --color-link-hover: #155a8a;
+    --color-link-hover: #183c6a;
     --color-border: #cccccc;
 
     /* LAYOUT */
@@ -31,6 +31,11 @@
         padding: 0;
     }
 
+    h1 {
+        font-size: xx-large;
+        font-weight: normal !important;
+    }
+
     p {
         font-size: smaller;
     }
@@ -39,6 +44,10 @@
 @layer components {
     .touch-target:hover {
         border-bottom: 2px solid var(--color-link-hover) !important;
+    }
+
+    .serif {
+        font-family: var(--font-serif);
     }
 
     .rounded-circle {

@@ -12,13 +12,14 @@
             <img src="/assets/icons/share.svg" alt="Share" />
         </div>
     </div>
-
     <div class="flex flex-col md:flex-row ">
         <div class="flex flex-1">
             A
         </div>
-        <div class="flex flex-1 flex-col space-y-1 p-1 md:p-0 pl-1 pr-1">
+        <div class="flex flex-1 flex-col space-y-1 p-3 md:pt-0">
+            <p x-text="'$' + selectedProduct.price" class="text-base"></p>
             <h1 x-text="selectedProduct ? selectedProduct.name : null" class="uppercase"></h1>
+            <p x-text="'STYLE NO.' + selectedProduct.style" class="text-base"></p>
             <p x-text="selectedProduct.id"></p>
             <div class="flex flex-row space-x-1">
                 {% for product in products %}
@@ -29,6 +30,25 @@
                         @click='selectProduct({{ product | json | escape }} )'
                     />
                 {% endfor %}
+            </div>
+            <p x-text="window.texts.text_product_description" class="text-base serif"></p>
+            <p x-text="window.texts.text_read_more" class="text-base text-[var(--color-link-hover)] cursor-pointer underline"></p>
+            <div class="flex flex-col space-y-1 bg-[var(--color-bg-primary)] p-1">
+                <p x-text="window.texts.text_selected + ':'" class="text-sm serif"></p>
+                <div class="flex flex-row space-x-1">
+                    <div class="flex flex-1 border-r-1 border-[var(--color-border)]">
+                        <p x-text="window.texts.text_size + ':'" class="text-base serif"></p>
+                    </div>
+                    <div class="flex flex-1 border-r-1 border-[var(--color-border)] justify-center">
+                        <p x-text="window.texts.text_width + ':'" class="text-base serif"></p>
+                    </div>
+                    <div class="flex flex-1 justify-end">
+                        <p x-text="window.texts.text_toe_and_heel + ':'" class="text-base serif"></p>
+                    </div>
+                </div>
+                <button>
+                    A
+                </button>
             </div>
         </div>
     </div>
