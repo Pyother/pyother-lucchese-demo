@@ -3,7 +3,7 @@
         {
             "id": 1,
             "name": "Priscilla Suede",
-            "price": 0,
+            "price": "1,095",
             "color": "brown",
             "colorPhoto": "https://cdn.starapps.studio/v2/apps/vsk/lucchese-inc/groups/122889/100/priscilla-suede-espresso.webp?width=80&height=80&crop=top",
             "style": "GY4579.S54-2019-B-6",
@@ -15,7 +15,7 @@
         {
             "id": 2,
             "name": "Priscilla",
-            "price": 0,
+            "price": "1,095",
             "color": "Glitz Cream",
             "colorPhoto": "https://cdn.starapps.studio/v2/apps/vsk/lucchese-inc/groups/122889/100/priscilla-glitz-cream.webp?width=80&height=80&crop=top",
             "style": "N4831.54-1521-B-6",
@@ -27,7 +27,7 @@
         {
             "id": 3,
             "name": "Priscilla",
-            "price": 0,
+            "price": "1,095",
             "color": "Red",
             "colorPhoto": "https://cdn.starapps.studio/v2/apps/vsk/lucchese-inc/groups/122889/100/priscilla-red.webp?width=80&height=80&crop=top",
             "style": "N4830.54-6010-B-6",
