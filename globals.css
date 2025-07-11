@@ -69,4 +69,14 @@
         color: var(--color-link-hover);
         text-transform: uppercase;
     }
+
+    .filled-button {
+        padding: var(--spacing);
+        background-color: var(--color-link-hover);
+        color: var(--color-bg-secondary);
+        text-transform: uppercase;
+        border: none;
+        display: flex;
+        justify-content: center;
+    }
 }
