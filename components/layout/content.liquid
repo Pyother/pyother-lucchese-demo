@@ -1,3 +1,10 @@
+<style>
+    .sticky-product {
+        position: sticky;
+        top: 0;
+    }
+</style>
+
 <div x-data="productSelector()" x-init="init()" class="flex flex-col">
 
     <!-- Breadcrumbs -->
@@ -7,11 +14,17 @@
     <div class="flex flex-col md:flex-row ">
 
         <!-- Gallery -->
-        {% render 'content/gallery' %}
+        <div class="w-full md:w-1/2">
+            {% render 'content/gallery' %}
+        </div>
         <!--  -->
 
         <!-- Product -->
-        {% render 'content/product' with products as products %}
+        <div class="w-full md:w-1/2">
+            <div class="md:sticky md:top-0">
+                {% render 'content/product' with products as products %}
+            </div>
+        </div>
         <!--  -->
 
     </div>
