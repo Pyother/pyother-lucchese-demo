@@ -1,17 +1,63 @@
-<div x-data="{ activeTab: 'men' }" class="flex flex-col">
+<style>
+    .tab {
+        text-transform: uppercase;
+        font-size: small;
+        padding-right: 2rem;
+        padding-left: 2rem;
+        padding-bottom: 1rem;
+    }
+    .sticky-header {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background-color: var(--color-bg-secondary);
+    }
+</style>
+<div 
+    x-data="{
+        activeTab: 'men',
+        tabs: [
+            { id: 1, text: window.texts.text_boots_section, specific: false },
+            { id: 2, text: window.texts.text_shoes_section, specific: false },
+            { id: 3, text_men: window.texts.text_apparel_section, text_women: window.texts.text_ready_to_wear_section, specific: true },
+            { id: 4, text: window.texts.text_accessories_section, specific: false },
+            { id: 5, text: window.texts.text_lifestyle_section, specific: false },
+            { id: 6, text: window.texts.text_collaborations_section, specific: false },
+            { id: 7, text: window.texts.text_shop_the_look_section, specific: false }
+        ],
+        icons: [
+            { src: '/assets/icons/location.svg', alt: 'Location', classes: 'hidden lg:block' },
+            { src: '/assets/icons/search.svg', alt: 'Search', classes: 'hidden lg:block' },
+            { src: '/assets/icons/user.svg', alt: 'User', classes: 'hidden lg:block' },
+            { src: '/assets/icons/favourite.svg', alt: 'Favourite', classes: '' },
+            { src: '/assets/icons/cart.svg', alt: 'Cart', classes: '' }
+        ]
+    }"
+    class="flex flex-col sticky-header"
+>
     <div class="flex flex-row p-[var(--spacing)]">
         <div class="flex flex-1 justify-start">
-            <div x-on:click="activeTab = 'men'" :class="activeTab === 'men' 
-                            ? 'text-[var(--color-link-hover)] md:flex items-center touch-target pr-4 pl-4 border-b-2 border-[var(--color-border)]' 
-                            : 'md:flex items-center pr-4 pl-4 border-b-2 border-[var(--color-border)]'" class="hidden">
-                MEN
+            <div 
+                x-on:click="activeTab = 'men'" 
+                :class="activeTab === 'men' 
+                    ? 'lg:flex items-center pr-4 pl-4 border-b-2 border-[var(--color-link-hoverr)]' 
+                    : 'lg:flex items-center pr-4 pl-4 border-b-1 border-[var(--color-border)]'" 
+                class="text-[var(--color-link-hover)] hidden uppercase"
+                x-text="window.texts.text_tab_men"    
+            >
             </div>
-            <div x-on:click="activeTab = 'women'" :class="activeTab === 'women' 
-                            ? 'text-[var(--color-link-hover)] md:flex items-center touch-target pr-4 pl-4 border-b-2 border-[var(--color-border)]' 
-                            : 'md:flex items-center pr-4 pl-4 border-b-2 border-[var(--color-border)]'" class="hidden">
-                WOMEN
+            <div 
+                x-on:click="activeTab = 'women'" 
+                :class="activeTab === 'women' 
+                ? 'lg:flex items-center pr-4 pl-4 border-b-2 border-[var(--color-link-hover)]' 
+                : 'lg:flex items-center pr-4 pl-4 border-b-1 border-[var(--color-border)]'" 
+                class="text-[var(--color-link-hover)] hidden uppercase"
+                x-text="window.texts.text_tab_women"
+            >
             </div>
-            <div class="flex md:hidden">
+            <div class="flex lg:hidden">
                 <img src="/assets/icons/menu.svg" alt="Menu" class="w-1/2" />
             </div>
         </div>
@@ -20,44 +66,21 @@
             <img src="/assets/images/logo.png" alt="Logo" class="w-[30vw] sm:w-[20vw] md:w-[15vw] lg:w-[10vw]" />
         </div>
         <div class="flex flex-1 justify-end">
-            <div class='touch-target hidden md:block p-[var(--spacing)]'>
-                <img src="/assets/icons/location.svg" alt="Location" />
-            </div>
-            <div class='touch-target hidden md:block p-[var(--spacing)]'>
-                <img src="/assets/icons/search.svg" alt="Search" />
-            </div>
-            <div class='touch-target hidden md:block p-[var(--spacing)]'>
-                <img src="/assets/icons/user.svg" alt="User" />
-            </div>
-            <div class='touch-target p-[var(--spacing)]'>
-                <img src="/assets/icons/favourite.svg" alt="Favourite" />
-            </div>
-            <div class='touch-target p-[var(--spacing)]'>
-                <img src="/assets/icons/cart.svg" alt="Cart" />
-            </div>
+            <template x-for="icon in icons" :key="icon.src">
+                <div :class="`touch-target p-[var(--spacing)] ${icon.classes}`">
+                    <img :src="icon.src" :alt="icon.alt" />
+                </div>
+            </template>
         </div>
     </div>
     <div class="hidden lg:flex flex-1 flex-row justify-start border-b-1 border-[var(--color-border)]">
-        <div class="touch-target pb-1 pr-2 pl-2 text-xs">
-            BOOTS
-        </div>
-        <div class="touch-target pb-1 pr-2 pl-2 text-xs">
-            SHOES
-        </div>
-        <div class="touch-target pb-1 pr-2 pl-2 text-xs ">
-            APPAREL
-        </div>
-        <div class="touch-target pb-1 pr-2 pl-2 text-xs">
-            ACCESSORIES
-        </div>
-        <div class="touch-target pb-1 pr-2 pl-2 text-xs">
-            LIFESTYLE
-        </div>
-        <div class="touch-target pb-1 pr-2 pl-2 text-xs">
-            COLLABORATIONS
-        </div>
-        <div class="touch-target pb-1 pr-2 pl-2 text-xs">
-            SHOP THE LOOK
-        </div>
+        <template x-for="tab in tabs" :key="tab.id">
+            <div class="touch-target tab" x-text="tab.specific 
+                ? (activeTab === 'men' 
+                ? tab.text_men 
+                : tab.text_women) 
+                : tab.text">
+            </div>
+        </template>
     </div>
 </div>

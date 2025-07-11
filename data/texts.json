@@ -9,5 +9,15 @@
     "text_choose_size": "Choose Size",
     "text_add_to_cart": "Add to Cart",
     "text_color": "Color",
-    "text_purchasing_offer": "As low as $99/mo or 0% APR with Affirm. Check your purchasing power"
+    "text_purchasing_offer": "As low as $99/mo or 0% APR with Affirm. Check your purchasing power",
+    "text_boots_section": "Boots",
+    "text_apparel_section": "Apparel",
+    "text_accessories_section": "Accessories",
+    "text_shoes_section": "Shoes",
+    "text_ready_to_wear_section": "Ready to Wear",
+    "text_lifestyle_section": "Lifestyle",
+    "text_collaborations_section": "Collaborations",
+    "text_shop_the_look_section": "Shop the Look",
+    "text_tab_men": "Men",
+    "text_tab_women": "Women"
 }
