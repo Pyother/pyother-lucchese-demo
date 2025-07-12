@@ -1,6 +1,6 @@
 {
-  "name": "server",
-  "version": "1.0.0",
+  "name": "pyother-lucchese-demo",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
