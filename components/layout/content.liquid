@@ -5,7 +5,11 @@
     }
 </style>
 
-<div x-data="productSelector()" x-init="init()" class="flex flex-col">
+<div 
+    x-data="productSelector()" 
+    x-init="console.log('Products: ', products)"
+    class="flex flex-col"
+>
 
     <!-- Breadcrumbs -->
     {% render 'content/breadcrumbs' %}
@@ -26,6 +30,7 @@
             </div>
         </div>
         <!--  -->
+        {% render 'content/recommendedProducts' with products as products %}
 
     </div>
 </div>
