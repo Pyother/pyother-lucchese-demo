@@ -49,7 +49,7 @@ async function loadData (url) {
 async function startServer() {
   try {
     products = await loadData(`${externalAPI}/api/products`);
-    texts = await loadData(`${externalAPI}/api/texts`);   
+    texts = await loadData(`${externalAPI}/api/texts`);  
 
     // * == Routes ==
     app.get('/', (req, res) => {
@@ -60,7 +60,7 @@ async function startServer() {
     app.listen(port, () => console.log(`App is running on http://localhost:${port}`));
 
   } catch (err) {
-    console.error('Błąd podczas ładowania danych:', err);
+    console.error('Error on loading data:', err);
     process.exit(1); 
   }
 }

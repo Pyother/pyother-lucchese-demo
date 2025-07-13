@@ -7,7 +7,6 @@
 
 <div 
     x-data="productSelector()" 
-    x-init="console.log('Products: ', products)"
     class="flex flex-col"
 >
 
@@ -30,7 +29,7 @@
             </div>
         </div>
         <!--  -->
-        {% render 'content/recommendedProducts' with products as products %}
+        {% render 'content/recommendedProducts' with products as products, bestsellers as bestsellers %}
 
     </div>
 </div>
@@ -39,6 +38,7 @@
     function productSelector() {
         return { 
             products: {{products | json | safe}},
+            bestsellers: {{bestsellers | json | safe}},
             selectedProduct: null,
             init() {
                 if (this.products.length > 0) {
@@ -51,3 +51,4 @@
         }
     }
 </script>
+
