@@ -4,7 +4,7 @@
         display: flex;
     }
     .product-item {
-        border: 1px solid;
+        
         height: 100%;
         flex: 1;
         height: 100%;
@@ -25,14 +25,13 @@
         <div class="flex lg:hidden justify-center items-center text-center p-2 pb-0">
             <h1 x-text="window.texts.text_recommendations_title" class="uppercase"></h1>
         </div>
-        <div class="w-full lg:w-1/2 flex justify-center items-center">
+        <div class="w-full lg:w-1/2 lg:min-w-2/5 flex justify-center items-center">
             <img src="https://www.lucchese.com/cdn/shop/files/1_800x.svg?v=1749824747" alt="Recommended Products" class="w-3/4 lg:w-full">
         </div>
-        <div class="flex flex-col space-y-2 w-full">
+        <div class="flex flex-col space-y-2 w-full" x-data="{ productsActiveElement: 0 }">
             <h1 x-text="window.texts.text_recommendations_title" class="hidden lg:block uppercase"></h1>
             <div 
-                class="flex-row h-full hidden sm:flex"
-                x-data="{ productsActiveElement: 0 }"
+                class="flex-row h-full hidden sm:flex space-x-[2px]"
             >
                 <div class="absolute flex items-center p-1 h-[70vh]">
                     <img 
@@ -43,9 +42,25 @@
                     >
                 </div>
                 <template x-for="product in products.filter(p => p.id !== selectedProduct.id).slice(productsActiveElement, productsActiveElement + 2)" :key="product.id">
-                    <div class="product-item flex flex-col items-center">
-                        <p x-text="product.name" class="text-sm text-center"></p>
-                        <p x-text="product.id" class="text-xs text-gray-500"></p>
+                    <div 
+                        class="product-item flex flex-col items-center" 
+                        x-data="{ elementHovered: false }"
+                        @mouseenter="elementHovered = true"
+                        @mouseleave="elementHovered = false"
+                        @focus="elementHovered = true"
+                        @blur="elementHovered = false"
+                    >
+                        <img :src="elementHovered ? product.photoPair : product.photoAngle" alt="Product Image" class="w-full h-3/4 object-cover">
+                        <div class="flex flex-col space-y-0.5 p-1 w-full">
+                            <p x-text="product.name" class="text-base uppercase text-[var(--color-link-hover)]"></p>
+                            <p x-text="'$' + product.price" class="text-base uppercase text-[var(--color-link-hover)]"></p>
+                            <p x-text="products.length + ' colors'" class="text-sm text-[var(--color-text-secondary)]" :class="elementHovered ? 'hidden' : 'block'"></p>
+                            <div class="flex flex-row space-x-1" :class="elementHovered ? 'block' : 'hidden'">
+                                {% for product in products %}
+                                    <img src="{{ product.colorPhoto }}" uppercase alt="{{ product.name }}" class="rounded-circle"/>
+                                {% endfor %}
+                            </div>
+                        </div>
                     </div>
                 </template>
                 <div class="absolute flex items-center p-1 right-[2rem] h-[70vh]">
@@ -58,18 +73,29 @@
                 </div>
             </div>
             <div class="flex-row h-full sm:hidden">
-                <div class="absolute flex items-center p-1 h-[70vh]">
-                    <img src="/assets/icons/forward.svg" alt="Left Icon" class="w-1.5 h-1.5 rotate-180"
-                        x-on:click="productsActiveElement = productsActiveElement > 0 ? productsActiveElement - 1 : 0">
+                <div class="absolute flex items-center p-1 h-[70vh] z-100" x-on:click="productsActiveElement = productsActiveElement > 0 ? productsActiveElement - 1 : 0">
+                    <img src="/assets/icons/forward.svg" alt="Left Icon" class="w-1.5 h-1.5 rotate-180">
                 </div>
-                <div class="absolute flex items-center p-1 right-0 h-[70vh]">
-                    <img src="/assets/icons/forward.svg" alt="Left Icon" class="w-1.5 h-1.5"
-                        x-on:click="productsActiveElement = productsActiveElement < products.length - 3 ? productsActiveElement + 1 : productsActiveElement">
+                <div class="absolute flex items-center p-1 right-0 h-[70vh] z-100" x-on:click="productsActiveElement = productsActiveElement < products.length - 2 ? productsActiveElement + 1 : productsActiveElement">
+                    <img src="/assets/icons/forward.svg" alt="Left Icon" class="w-1.5 h-1.5">
                 </div>
-                <template x-for="product in products.filter(p => p.id !== selectedProduct.id).slice(0, 1)" :key="product.id">
-                    <div class="product-item flex flex-col items-center">
-                        <p x-text="product.name" class="text-sm text-center"></p>
-                        <p x-text="product.id" class="text-xs text-gray-500"></p>
+                <template x-for="product in products.filter(p => p.id !== selectedProduct.id).slice(productsActiveElement, productsActiveElement + 1)" :key="product.id">
+                    <div class="product-item flex flex-col items-center" x-data="{ elementHovered: false }"
+                        @mouseenter="elementHovered = true" @mouseleave="elementHovered = false" @focus="elementHovered = true"
+                        @blur="elementHovered = false">
+                        <img :src="elementHovered ? product.photoPair : product.photoAngle" alt="Product Image"
+                            class="w-full h-3/4 object-cover">
+                        <div class="flex flex-col space-y-0.5 p-1 w-full">
+                            <p x-text="product.name" class="text-base uppercase text-[var(--color-link-hover)]"></p>
+                            <p x-text="'$' + product.price" class="text-base uppercase text-[var(--color-link-hover)]"></p>
+                            <p x-text="products.length + ' colors'" class="text-sm text-[var(--color-text-secondary)]"
+                                :class="elementHovered ? 'hidden' : 'block'"></p>
+                            <div class="flex flex-row space-x-1" :class="elementHovered ? 'block' : 'hidden'">
+                                {% for product in products %}
+                                <img src="{{ product.colorPhoto }}" uppercase alt="{{ product.name }}" class="rounded-circle" />
+                                {% endfor %}
+                            </div>
+                        </div>
                     </div>
                 </template>
             </div>
