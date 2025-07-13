@@ -105,34 +105,46 @@
 
     <!-- Bestsellers -->
     <div class="section flex-col lg:flex-row space-x-0 lg:space-x-2 space-y-2 lg:space-y-0 p-0 lg:p-2">
-        <div class="flex lg:hidden justify-center items-center text-center p-2 pb-0">
+        <div class="flex flex-col space-y-1 lg:hidden justify-center items-center text-center p-2 pb-0">
             <h1 x-text="window.texts.text_bestsellers_title" class="uppercase"></h1>
-            <div class="flex flex-row space-x-0.5 items-center">
+            <div class="flex flex-row space-x-0.5 items-center text-center">
                 <p x-text="window.texts.text_show_more" class="uppercase"></p>
                 <img src="/assets/icons/forward.svg" alt="Forward Icon" class="w-1 h-1">
             </div>
         </div>
-        <div class="w-full lg:w-1/2 flex justify-center items-center">
+        <div class="w-full lg:w-1/2 lg:min-w-2/5 flex justify-center items-center">
             <img src="https://www.lucchese.com/cdn/shop/files/2_800x.svg?v=1749824750" alt="Bestsellers"
                 class="w-3/4 lg:w-full">
         </div>
-        <div class="flex flex-col space-y-2 w-full">
+        <div class="flex flex-col space-y-2 w-full" x-data="{ bestsellersActiveElement: 0 }">
             <h1 x-text="window.texts.text_bestsellers_title" class="hidden lg:block uppercase"></h1>
-            <div class="flex flex-row space-x-0.5 items-center">
+            <div class="hidden lg:flex flex-row space-x-0.5 items-center">
                 <p x-text="window.texts.text_show_more" class="uppercase"></p>
                 <img src="/assets/icons/forward.svg" alt="Forward Icon" class="w-1 h-1">
             </div>
-            <div class="flex-row h-full hidden sm:flex" x-data="{ bestsellersActiveElement: 0 }">
+            <div class="flex-row h-full hidden sm:flex">
                 <div class="absolute flex items-center p-1 h-[70vh]">
                     <img src="/assets/icons/forward.svg" alt="Left Icon" class="w-1.5 h-1.5 rotate-180"
                         x-on:click="bestsellersActiveElement = bestsellersActiveElement > 0 ? bestsellersActiveElement - 1 : 0">
                 </div>
                 <template
                     x-for="bestseller in bestsellers.slice(bestsellersActiveElement, bestsellersActiveElement + 2)"
-                    :key="bestseller.id">
-                    <div class="product-item flex flex-col items-center">
-                        <p x-text="bestseller.name" class="text-sm text-center"></p>
-                        <p x-text="bestseller.id" class="text-xs text-gray-500"></p>
+                    :key="bestseller.id"
+                >
+                    <div class="product-item flex flex-col items-center" x-data="{ elementHovered: false }" @mouseenter="elementHovered = true" @mouseleave="elementHovered = false" @focus="elementHovered = true"
+                        @blur="elementHovered = false">
+                        <img :src="elementHovered ? bestseller.photoSecondary : bestseller.photoPrimary" class="w-full h-3/4 object-cover"/>
+                        <div class="flex flex-col space-y-0.5 p-1 w-full">
+                            <p x-text="bestseller.name" class="text-base uppercase text-[var(--color-link-hover)]"></p>
+                            <p x-text="'$' + bestseller.price" class="text-base uppercase text-[var(--color-link-hover)]"></p>
+                            <p x-text="bestseller.numberOfColors + ' colors'" class="text-sm text-[var(--color-text-secondary)]"
+                                :class="elementHovered ? 'hidden' : 'block'"></p>
+                            <div class="flex flex-row space-x-1" :class="elementHovered ? 'block' : 'hidden'">
+                                <template x-for="color in bestseller.colorPhotos" :key="color">
+                                    <img :src="color" alt="Color Image" class="rounded-circle"/>
+                                </template>
+                            </div>
+                        </div>
                     </div>
                 </template>
                 <div class="absolute flex items-center p-1 right-[2rem] h-[70vh]">
@@ -149,11 +161,24 @@
                     <img src="/assets/icons/forward.svg" alt="Left Icon" class="w-1.5 h-1.5"
                         x-on:click="bestsellersActiveElement = bestsellersActiveElement < bestsellers.length - 3 ? bestsellersActiveElement + 1 : bestsellersActiveElement">
                 </div>
-                <template x-for="product in bestsellers.filter(p => p.id !== selectedProduct.id).slice(0, 1)"
-                    :key="product.id">
-                    <div class="product-item flex flex-col items-center">
-                        <p x-text="product.name" class="text-sm text-center"></p>
-                        <p x-text="product.id" class="text-xs text-gray-500"></p>
+                <template x-for="bestseller in bestsellers.slice(bestsellersActiveElement, bestsellersActiveElement + 1)"
+                    :key="bestsellers.id">
+                    <div class="product-item flex flex-col items-center" x-data="{ elementHovered: false }"
+                        @mouseenter="elementHovered = true" @mouseleave="elementHovered = false" @focus="elementHovered = true"
+                        @blur="elementHovered = false">
+                        <img :src="elementHovered ? bestseller.photoSecondary : bestseller.photoPrimary"
+                            class="w-full h-3/4 object-cover" />
+                        <div class="flex flex-col space-y-0.5 p-1 w-full">
+                            <p x-text="bestseller.name" class="text-base uppercase text-[var(--color-link-hover)]"></p>
+                            <p x-text="'$' + bestseller.price" class="text-base uppercase text-[var(--color-link-hover)]"></p>
+                            <p x-text="bestseller.numberOfColors + ' colors'" class="text-sm text-[var(--color-text-secondary)]"
+                                :class="elementHovered ? 'hidden' : 'block'"></p>
+                            <div class="flex flex-row space-x-1" :class="elementHovered ? 'block' : 'hidden'">
+                                <template x-for="color in bestseller.colorPhotos" :key="color">
+                                    <img :src="color" alt="Color Image" class="rounded-circle" />
+                                </template>
+                            </div>
+                        </div>
                     </div>
                 </template>
             </div>
