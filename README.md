@@ -33,4 +33,24 @@ npm run dev
 
 The project is hosted at: https://lucchese-bootmaker-demo.pyother.pl/. 
 
+## Tests
+
+To run the tests for this project, install following packages:
+
+```sh
+npx playwright install
+```
+
+After installation, ensure that server is running:
+
+```
+npm run dev
+```
+
+In another terminal run the tests with this command:
+
+```
+npm run test
+```
+
 
