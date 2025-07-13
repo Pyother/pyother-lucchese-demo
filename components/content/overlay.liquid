@@ -81,6 +81,7 @@
         <div class="overlay-size-grid">
             {% for size in productOptions.availableSizes %}
                 <button 
+                    id="overlay-size-button-{{ size }}"
                     class="overlay-size-button" 
                     :class="selectedOptions.size === '{{ size }}' ? 'selected' : 'not-selected'"
                     x-text="'{{ size }}'"
@@ -95,6 +96,7 @@
         <div class="overlay-size-grid border-b-1 border-[var(--color-border)] pb-1">
             {% for width in productOptions.availableWidths %}
                 <button 
+                    id="overlay-size-button-{{ width }}"
                     class="overlay-size-button" 
                     :class="selectedOptions.width === '{{ width }}' ? 'selected' : 'not-selected'"
                     x-text="'{{ width }}'"

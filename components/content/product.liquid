@@ -45,7 +45,11 @@
     <!-- 3. Section -->
     <div class="flex flex-col space-y-1">
         <p x-text="window.texts.text_product_description" class="text-base"></p>
-        <p x-text="window.texts.text_read_more" class="text-base text-[var(--color-link-hover)] cursor-pointer underline"></p>
+        <p 
+            x-text="window.texts.text_read_more" 
+            class="text-base text-[var(--color-link-hover)] cursor-pointer underline"
+            @click="document.getElementById('recommended-products')?.scrollIntoView({ behavior: 'smooth' })"
+        ></p>
     </div>
 
     <!-- 4. Section -->
@@ -55,7 +59,7 @@
             <div class="flex flex-row space-x-1">
                 <div class="flex flex-row space-x-0.5 flex-1 border-r-1 border-[var(--color-border)]">
                     <p x-text="window.texts.text_size + ':'" class="text-base text-[var(--color-link-hover)]"></p>
-                    <p class="text-base font-bold text-[var(--color-link-hover)]" x-text="selectedOptions.size"></p>
+                    <p id="selected-size-display" class="text-base font-bold text-[var(--color-link-hover)]" x-text="selectedOptions.size"></p>
                 </div>
                 <div class="flex flex-row space-x-0.5 flex-1 border-r-1 border-[var(--color-border)] justify-center">
                     <p x-text="window.texts.text_width + ':'" class="text-base text-[var(--color-link-hover)]">
@@ -68,7 +72,7 @@
                 </div>
             </div>
         </div>
-        <button class="classic-button flex flex-row" @click="overlayVisible = true">
+        <button id="overlay-opener" class="classic-button flex flex-row" @click="overlayVisible = true">
             <div class="flex-1">
                 <p x-text="window.texts.text_choose_size"></p>
             </div>

@@ -18,6 +18,7 @@
         bestsellers: {{ bestsellers | json | safe }}, 
         products: {{ products | json | safe }}
     }"
+    id="recommended-products"
 >
 
     <!-- Recommended Products -->
@@ -28,7 +29,7 @@
         <div class="w-full lg:w-1/2 lg:min-w-2/5 flex justify-center items-center">
             <img src="https://www.lucchese.com/cdn/shop/files/1_800x.svg?v=1749824747" alt="Recommended Products" class="w-3/4 lg:w-full">
         </div>
-        <div class="flex flex-col space-y-2 w-full" x-data="{ productsActiveElement: 0 }">
+        <div class="flex flex-col space-y-2 w-full" x-data="{ productsActiveElement: 0 }" id="#recommended-products">
             <h1 x-text="window.texts.text_recommendations_title" class="hidden lg:block uppercase"></h1>
             <div 
                 class="flex-row h-full hidden sm:flex space-x-[2px]"
@@ -49,6 +50,7 @@
                         @mouseleave="elementHovered = false"
                         @focus="elementHovered = true"
                         @blur="elementHovered = false"
+                        id="recommended-product-{{ product.id }}"
                     >
                         <img :src="elementHovered ? product.photoPair : product.photoAngle" alt="Product Image" class="w-full h-3/4 object-cover">
                         <div class="flex flex-col space-y-0.5 p-1 w-full">
@@ -72,7 +74,7 @@
                     >
                 </div>
             </div>
-            <div class="flex-row h-full sm:hidden">
+            <div class="flex-row h-full sm:hidden ">
                 <div class="absolute flex items-center p-1 h-[70vh] z-100" x-on:click="productsActiveElement = productsActiveElement > 0 ? productsActiveElement - 1 : 0">
                     <img src="/assets/icons/forward.svg" alt="Left Icon" class="w-1.5 h-1.5 rotate-180">
                 </div>
@@ -82,7 +84,8 @@
                 <template x-for="product in products.filter(p => p.id !== selectedProduct.id).slice(productsActiveElement, productsActiveElement + 1)" :key="product.id">
                     <div class="product-item flex flex-col items-center" x-data="{ elementHovered: false }"
                         @mouseenter="elementHovered = true" @mouseleave="elementHovered = false" @focus="elementHovered = true"
-                        @blur="elementHovered = false">
+                        @blur="elementHovered = false"
+                        id="recommended-product-{{ product.id }}">
                         <img :src="elementHovered ? product.photoPair : product.photoAngle" alt="Product Image"
                             class="w-full h-3/4 object-cover">
                         <div class="flex flex-col space-y-0.5 p-1 w-full">
@@ -122,7 +125,7 @@
                 <p x-text="window.texts.text_show_more" class="uppercase"></p>
                 <img src="/assets/icons/forward.svg" alt="Forward Icon" class="w-1 h-1">
             </div>
-            <div class="flex-row h-full hidden sm:flex">
+            <div class="flex-row h-full hidden sm:flex space-x-[2px]">
                 <div class="absolute flex items-center p-1 h-[70vh]">
                     <img src="/assets/icons/forward.svg" alt="Left Icon" class="w-1.5 h-1.5 rotate-180"
                         x-on:click="bestsellersActiveElement = bestsellersActiveElement > 0 ? bestsellersActiveElement - 1 : 0">
@@ -132,7 +135,8 @@
                     :key="bestseller.id"
                 >
                     <div class="product-item flex flex-col items-center" x-data="{ elementHovered: false }" @mouseenter="elementHovered = true" @mouseleave="elementHovered = false" @focus="elementHovered = true"
-                        @blur="elementHovered = false">
+                        @blur="elementHovered = false"
+                        id="bestseller-{{ bestseller.id }}">
                         <img :src="elementHovered ? bestseller.photoSecondary : bestseller.photoPrimary" class="w-full h-3/4 object-cover"/>
                         <div class="flex flex-col space-y-0.5 p-1 w-full">
                             <p x-text="bestseller.name" class="text-base uppercase text-[var(--color-link-hover)]"></p>
@@ -165,7 +169,8 @@
                     :key="bestsellers.id">
                     <div class="product-item flex flex-col items-center" x-data="{ elementHovered: false }"
                         @mouseenter="elementHovered = true" @mouseleave="elementHovered = false" @focus="elementHovered = true"
-                        @blur="elementHovered = false">
+                        @blur="elementHovered = false"
+                        id="bestseller-{{ bestseller.id }}">
                         <img :src="elementHovered ? bestseller.photoSecondary : bestseller.photoPrimary"
                             class="w-full h-3/4 object-cover" />
                         <div class="flex flex-col space-y-0.5 p-1 w-full">
