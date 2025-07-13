@@ -40,6 +40,10 @@
 }
 
 @layer components {
+    .touch-target {
+        border-bottom: 2px solid transparent !important;
+    }
+
     .touch-target:hover {
         border-bottom: 2px solid var(--color-link-hover) !important;
     }
