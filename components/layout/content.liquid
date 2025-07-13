@@ -29,8 +29,11 @@
             </div>
         </div>
         <!--  -->
+
         {% render 'content/recommendedProducts' with products as products, bestsellers as bestsellers %}
 
+        {% render 'content/overlay' with productOptions as productOptions %}
+        
     </div>
 </div>
 
@@ -39,14 +42,26 @@
         return { 
             products: {{products | json | safe}},
             bestsellers: {{bestsellers | json | safe}},
+            productOptions: {{productOptions | json | safe}},
             selectedProduct: null,
             init() {
                 if (this.products.length > 0) {
                     this.selectedProduct = this.products[0];
                 }
+                this.selectedOptions = {
+                    size: '10',
+                    width: 'B',
+                    toeAndHeel: '5 + 4'
+                };
             },
             selectProduct(product) {
                 this.selectedProduct = product;
+            },
+            overlayVisible: false,
+            selectedOptions: {
+                size: null,
+                width: null,
+                toeAndHeel: null
             }
         }
     }
